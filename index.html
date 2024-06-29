@@ -1,0 +1,260 @@
+<!DOCTYPE html> <!-- Declaración del tipo de documento como HTML5 -->
+<html lang="es"> <!-- Inicio del documento HTML con especificación de idioma -->
+<head>
+    <meta charset="UTF-8"> <!-- Codificación de caracteres UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuración de la vista adaptable -->
+    <title>BBVA Simulación</title> <!-- Título de la página -->
+
+    <style>
+        /* Estilos CSS para la página */
+        body {
+            font-family: Arial, sans-serif; /* Fuente y familia de fuentes para todo el cuerpo */
+            margin: 0; /* Sin márgenes externos */
+            padding: 0; /* Sin relleno externo */
+            background-color: #f0f0f0; /* Color de fondo general */
+        }
+
+        header {
+            background-color: #004481; /* Color de fondo del encabezado */
+            color: white; /* Color del texto en el encabezado */
+            padding: 10px 0; /* Espaciado interior del encabezado */
+            text-align: center; /* Alineación del texto centrada */
+        }
+
+        nav {
+            background-color: #0079bf; /* Color de fondo de la barra de navegación */
+            display: flex; /* Contenedor de navegación flexbox */
+            justify-content: center; /* Centrar elementos de navegación */
+            padding: 10px 0; /* Espaciado interior de la barra de navegación */
+        }
+
+        nav a {
+            color: white; /* Color del texto en los enlaces de navegación */
+            text-decoration: none; /* Sin subrayado en los enlaces */
+            margin: 0 15px; /* Márgenes horizontales entre enlaces */
+            font-weight: bold; /* Peso de la fuente en negrita */
+            display: flex; /* Contenedor de enlaces flexbox */
+            align-items: center; /* Alinear elementos verticalmente */
+        }
+
+        nav a img {
+            width: 20px; /* Ancho de las imágenes dentro de los enlaces */
+            height: 20px; /* Alto de las imágenes dentro de los enlaces */
+            margin-right: 5px; /* Márgen derecho de las imágenes */
+        }
+
+        nav a:hover {
+            text-decoration: underline; /* Subrayado en los enlaces al pasar el cursor */
+        }
+
+        .main-content {
+            padding: 20px; /* Espaciado interior del contenido principal */
+        }
+
+        .active {
+            display: block; /* Mostrar el elemento activo */
+        }
+
+        section {
+            display: none; /* Ocultar todas las secciones por defecto */
+        }
+
+        #inicio {
+            display: block; /* Mostrar la sección de inicio por defecto */
+        }
+
+        .image-container {
+            text-align: center; /* Alinear contenido de imágenes al centro */
+            margin-top: 20px; /* Margen superior de la sección de imágenes */
+        }
+
+        .image-container img {
+            max-width: 100%; /* Ancho máximo de las imágenes */
+            height: auto; /* Altura automática para mantener la proporción */
+        }
+
+        #productos h2 {
+            margin-bottom: 20px; /* Margen inferior del título "Nuestros Productos" */
+        }
+
+        #productos a {
+            display: block; /* Mostrar enlaces de productos como bloques */
+            background-color: #e7f3ff; /* Color de fondo de los enlaces de productos */
+            color: #004481; /* Color del texto en los enlaces de productos */
+            text-decoration: none; /* Sin subrayado en los enlaces */
+            padding: 10px; /* Espaciado interior de los enlaces */
+            margin-bottom: 10px; /* Margen inferior entre enlaces */
+            border-radius: 5px; /* Radio de borde para esquinas redondeadas */
+            transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+        }
+
+        #productos a:hover {
+            background-color: #cce7ff; /* Color de fondo al pasar el cursor sobre los enlaces */
+        }
+
+        #nosotros {
+            text-align: center; /* Alineación del contenido de la sección "Nosotros" */
+            padding: 50px 20px; /* Espaciado interior de la sección "Nosotros" */
+        }
+
+        #nosotros .caja-flotante {
+            display: inline-block; /* Mostrar caja flotante como bloque en línea */
+            background-color: white; /* Color de fondo de la caja flotante */
+            padding: 20px; /* Espaciado interior de la caja flotante */
+            border-radius: 10px; /* Radio de borde para esquinas redondeadas */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+            max-width: 300px; /* Ancho máximo de la caja flotante */
+            margin-top: 20px; /* Margen superior de la caja flotante */
+        }
+
+        footer {
+            background-color: #004481; /* Color de fondo del pie de página */
+            color: white; /* Color del texto en el pie de página */
+            text-align: center; /* Alineación del texto centrada */
+            padding: 10px 0; /* Espaciado interior del pie de página */
+            position: fixed; /* Fijar posición del pie de página */
+            bottom: 0; /* Alinear al fondo */
+            width: 100%; /* Ancho completo */
+        }
+
+        #contador-visitas {
+            font-size: 14px; /* Tamaño de fuente del contador de visitas */
+            margin-top: 10px; /* Margen superior del contador de visitas */
+            color: #555; /* Color del texto del contador de visitas */
+        }
+    </style>
+
+    <script>
+        // Función para mostrar la sección seleccionada y ocultar las demás
+        function mostrarSeccion(idSeccion) {
+            const secciones = document.querySelectorAll('section');
+            secciones.forEach(seccion => {
+                seccion.style.display = 'none'; // Ocultar todas las secciones
+            });
+            document.getElementById(idSeccion).style.display = 'block'; // Mostrar la sección seleccionada
+        }
+
+        // Función para incrementar el contador de visitas
+        function incrementarContadorVisitas() {
+            let contadorVisitas = localStorage.getItem('contadorVisitas');
+            if (contadorVisitas === null) {
+                contadorVisitas = 0;
+            }
+            contadorVisitas++; // Incrementar el contador de visitas
+            localStorage.setItem('contadorVisitas', contadorVisitas); // Guardar en localStorage
+            document.getElementById('contador-visitas').innerText = `Visitas: ${contadorVisitas}`; // Mostrar contador actualizado
+        }
+
+        // Incrementar el contador de visitas cuando se carga la página
+        window.onload = incrementarContadorVisitas;
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>BBVA Simulación</h1> <!-- Encabezado principal -->
+	        <div id="contador-visitas" style="text-align: center; margin-top: 20px;">Visitas: 0</div> <!-- Contador de visitas -->
+</header>
+
+<nav>
+    <!-- Barra de navegación con enlaces a secciones internas -->
+    <a href="javascript:void(0)" onclick="mostrarSeccion('inicio')"><img src="https://img.icons8.com/ios-filled/50/000000/home.png"/>Inicio</a>
+    <a href="javascript:void(0)" onclick="mostrarSeccion('productos')"><img src="https://img.icons8.com/ios-filled/50/000000/shopping-bag.png"/>Productos</a>
+    <a href="javascript:void(0)" onclick="mostrarSeccion('nosotros')"><img src="https://img.icons8.com/ios-filled/50/000000/about.png"/>Nosotros</a>
+    <a href="javascript:void(0)" onclick="mostrarSeccion('contacto')"><img src="https://img.icons8.com/ios-filled/50/000000/phone.png"/>Contacto</a>
+    <a href="https://portal.bbva.mx/informes/ingreso.jsp" onclick="mostrarSeccion('inicio-sesion')"><img src="https://img.icons8.com/ios-filled/50/000000/login-rounded-right.png"/>Inicio de Sesión</a>
+</nav>
+
+<div class="main-content">
+    <section id="inicio" class="active">
+        <!-- Sección "Inicio" visible por defecto -->
+        <h1 style="text-align: center; color: #004481;">Bienvenido a BBVA</h1>
+        <p style="text-align: justify; margin: 20px;">
+            BBVA es más que un banco, es un socio comprometido con tu bienestar financiero. Creemos en la importancia de estar cerca de nuestros clientes, ofreciéndoles soluciones personalizadas que se adapten a sus necesidades y metas. Desde la gestión de tus ahorros hasta la planificación de inversiones, estamos aquí para apoyarte en cada paso de tu vida financiera.
+        </p>
+        <p style="text-align: justify; margin: 20px;">
+            Nuestra misión es ayudarte a lograr un futuro financiero más seguro y próspero, proporcionando productos y servicios de alta calidad, respaldados por una sólida red de expertos financieros. Confía en BBVA para ser tu guía en el mundo de las finanzas, siempre con la innovación y la tecnología al servicio de tu comodidad y seguridad.
+        </p>
+        <div class="image-container">
+            <img src="bbvai.png" alt="Descripción de la imagen"> <!-- Imagen de ilustración -->
+        </div>
+
+        
+    </section>
+
+    <section id="productos">
+        <!-- Sección "Productos" -->
+        <h2 style="text-align: center; color: #004481;">Nuestros Productos</h2>
+        <a href="https://www.bbva.mx/personas/productos/tarjetas-de-credito.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Tarjetas de crédito</a>
+        <a href="https://www.bbva.mx/personas/productos/creditos.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Créditos y préstamos</a>
+        <a href="https://www.bbva.mx/personas/productos/cuentas.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Cuentas de débito</a>
+        <a href="https://www.bbva.mx/personas/productos/ahorro.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Ahorro</a>
+        <a href="https://www.bbva.mx/personas/productos/inversion.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Inversiones</a>
+        <a href="https://www.bbva.mx/personas/productos/nomina.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Nómina</a>
+        <a href="https://www.bbva.mx/personas/productos/pensiones.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Pensiones</a>
+        <a href="https://www.bbva.mx/personas/productos/inmuebles.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Inmuebles</a>
+        <a href="https://www.bbva.mx/personas/productos/seguros.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Seguros</a>
+        <a href="https://www.bbva.mx/personas/banca-patrimonial-y-privada.html" style="background-color: #e7f3ff; color: #004481; text-decoration: none; padding: 10px; margin: 10px; display: block; border-radius: 5px; transition: background-color 0.3s ease; text-align: center;">Banca Patrimonial y Privada</a>
+    </section>
+
+   <section id="nosotros">
+    <!-- Sección "Sobre Nosotros" -->
+    <h2 style="text-align: center; color: #004481;">Sobre Nosotros</h2>
+    <p style="text-align: justify; margin: 20px;">
+        En BBVA, estamos orgullosos de nuestra historia y del impacto positivo que hemos tenido en las vidas de millones de personas. Desde nuestros inicios, hemos mantenido un firme compromiso con la innovación, buscando constantemente nuevas formas de mejorar la experiencia bancaria para nuestros clientes.
+    </p>
+    <p style="text-align: justify; margin: 20px;">
+        Nuestros valores fundamentales de transparencia, integridad y responsabilidad social nos guían en todas nuestras acciones. Creemos que el éxito financiero debe ir de la mano con el bienestar de la comunidad, y trabajamos incansablemente para ser una fuerza para el bien en todas las regiones donde operamos.
+    </p>
+    <div class="caja-flotante" style="text-align: justify; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 300px; margin: 20px auto;">
+        <p>Somos BBVA, una institución comprometida con tu bienestar financiero. Desde nuestros inicios, hemos trabajado para ofrecerte los mejores servicios y productos financieros.</p>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="https://www.bbva.mx/personas/informacion-corporativa/mision.html" style="background-color: #004481; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">Conoce más</a>
+    </div>
+</section>
+
+    <section id="contacto">
+        <!-- Sección "Contacto" -->
+        <h2 style="text-align: center; color: #004481;">Contacto</h2>
+        <p style="text-align: justify; margin: 20px;">
+            En BBVA, valoramos cada interacción con nuestros clientes. Si tienes alguna pregunta, comentario o necesitas asistencia, estamos aquí para ayudarte. Puedes comunicarte con nosotros a través de diferentes canales para recibir la atención que mereces.
+        </p>
+        <ul style="text-align: justify; margin: 20px;">
+            <li><strong>Teléfono:</strong> Llámanos al 01800-BBVA (2282), donde nuestros representantes estarán encantados de asistirte con cualquier consulta o servicio que necesites.</li>
+            <li><strong>Email:</strong> Escríbenos a <a href="mailto:atencionclientes@bbva.com">atencionclientes@bbva.com</a> y responderemos tus preguntas lo antes posible.</li>
+            <li><strong>Oficinas:</strong> Visítanos en cualquiera de nuestras sucursales. Nuestro equipo estará listo para ayudarte personalmente.</li>
+            <li><strong>Centro de Ayuda:</strong> Accede a nuestro <a href="https://www.bbva.mx/personas/centro-de-ayuda/ayuda-urgente.html">Centro de Ayuda</a> para encontrar respuestas a preguntas frecuentes y recursos útiles.</li>
+            <li><strong>Redes Sociales:</strong> Síguenos en nuestras redes sociales para estar al tanto de las últimas noticias y actualizaciones:</li>
+            <ul>
+                <li>Facebook: <a href="https://www.facebook.com/BBVA">BBVA en Facebook</a></li>
+                <li>Twitter: <a href="https://twitter.com/BBVA_Mex">BBVA en Twitter</a></li>
+                <li>Instagram: <a href="https://www.instagram.com/bbva_mx/">BBVA en Instagram</a></li>
+            </ul>
+        </ul>
+        <p style="text-align: justify; margin: 20px;">
+            Estamos comprometidos con tu satisfacción y esperamos poder ayudarte en todo lo que necesites. Tu experiencia con BBVA es nuestra prioridad.
+        </p>
+    </section>
+
+<section id="inicio-sesion">
+    <!-- Sección "Inicio de Sesión" -->
+    <h2 style="text-align: center; color: #004481;">Inicio de Sesión</h2>
+    <p style="text-align: justify; margin: 20px;">
+        Accede a tu cuenta en BBVA para gestionar tus finanzas personales de manera segura y conveniente. Nuestro portal en línea te permite realizar operaciones bancarias desde cualquier lugar, en cualquier momento.
+    </p>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="https://portal.bbva.mx/informes/ingreso.jsp" style="background-color: #004481; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">Iniciar Sesión</a>
+    </div>
+</section>
+</div>
+
+<footer>
+    <!-- Pie de página con información adicional -->
+	
+    <p style="margin: 0;">© 2024 BBVA. Todos los derechos reservados.</p>
+	
+</footer>
+
+</body>
+</html>
